@@ -1,0 +1,98 @@
+body {
+  background-color: black !important;
+  overflow-y: scroll;
+}
+
+@font-face {
+  font-family: "Market_Deco";
+  src: local("Market_Deco"), url("./assets/fonts/Market_Deco.ttf") format("truetype");
+  font-weight: bold;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2em;
+}
+
+.header-border-box {
+  display: flex;
+  padding: 15px;
+  border: 5px solid white;
+}
+
+.header-name {
+  font-family: "Market_Deco";
+  color: white;
+  font-size: 2em;
+  margin-top: 0.2em;
+}
+
+.select-name {
+  margin: 1.5em;
+  color: white;
+  display: flex;
+  justify-content: center;
+}
+
+.name-prompt {
+  display: flex;
+  justify-content: center;
+}
+
+.dropdown-button {
+  margin-left: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.greeting {
+  display: flex;
+  justify-content: center;
+  color: white;
+}
+
+.statistics {
+  margin-top: 1.5em;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  color: white;
+}
+
+.stat {
+  margin: 0px;
+  font-weight: 500;
+}
+
+.sign-button-container {
+  display: flex;
+  justify-content: center; 
+}
+
+.sign-button {
+  margin: 3em;
+  width: 15em;
+  height: 7em;
+}
+
+.footer-buttons {
+  position: fixed;
+  bottom: 0px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  align-items: center;
+}
+
+.footer-button {
+  margin: .25em;
+}
