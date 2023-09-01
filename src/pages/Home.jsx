@@ -60,7 +60,7 @@ export default function Home() {
                 {showGreeting && 
                 <>
                     <div className="greeting">
-                        <h2>Hi {user.name}!</h2>
+                        <h2>Hi <span style={{textDecoration: "underline"}}>{user.name}</span>!</h2>
                     </div>
 
                     <div className="statistics">
