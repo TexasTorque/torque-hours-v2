@@ -1,7 +1,10 @@
 import Header from "../components/Header";
 import { Button, Dropdown } from "react-bootstrap";
 import "../index.css";
-import { getAllUsers } from "../firebase.jsx"
+import {
+    getAllUsers,
+    getRank,
+} from "../firebase.jsx"
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -62,8 +65,8 @@ export default function Home() {
 
                     <div className="statistics">
                         <p className="stat">Your Hours This Season: {user.hours}</p>
-                        <p className="stat">Your Meetings Attended: {user.meetings.length}</p> 
-                        <p className="stat">Your Hours Rank (Out of 71): 0</p> 
+                        <p className="stat">Your Meetings Attended: {user.meetings.length}</p>
+                        <p className="stat">Your Hours Rank (Out of 71): #{getRank(users, user)}</p>
                     </div>
 
                     <div className="sign-button-container">

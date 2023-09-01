@@ -4,7 +4,6 @@ import {
     collection,
     getDocs,
 } from "firebase/firestore";
-import { useState } from "react";
 
 const firebaseConfig = {
   apiKey: "AIzaSyC4f31MUqRVckOcA5bDvCNH6GGdOGB2D0Y",
@@ -19,7 +18,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-export const getUser = async (users, name) => {
+export const getUser = (users, name) => {
   return users.filter((doc) => doc.name === name)[0];
 }
 
@@ -28,4 +27,19 @@ export const getAllUsers = async () => {
   const hoursSnap = await getDocs(hoursRef);
   
   return hoursSnap.docs.map((doc) => doc.data());
+}
+
+export const getRank = (users, user) => {
+  let rank = 1;
+  users.forEach(u => {
+    if (u.hours > user.hours) {
+      rank++;
+    }
+  });
+
+  if (rank === 1) return rank + " 👑";
+  else if (rank === 2) return rank + " 🥈";
+  else if (rank === 3) return rank + " 🥉";
+  else if (rank === users.length - 1) return rank + " 😭 ";
+  else return rank;
 }
