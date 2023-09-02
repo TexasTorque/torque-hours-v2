@@ -47,9 +47,11 @@ export default function Home() {
             }
             signOut(user);
             setUser({ name: user.name, hours: user.hours + calcHours, meetings: user.meetings});
+            setSignMessage("Sign In");
         } else {
             signIn(user);
             setUser({ name: user.name, hours: user.hours, meetings: user.meetings, signin: Math.floor(new Date().getTime() / 1000)});
+            setSignMessage("Sign Out");
         }
     }
 

@@ -6,6 +6,7 @@ import {
     doc,
     setDoc,
     deleteField,
+    arrayUnion,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -66,7 +67,12 @@ export const addHours = async (user, hours) => {
 export const signIn = async (user) => {
   await getUID(user.name).then((val) => {
     const hoursRef = doc(db, 'hours', val);
-    setDoc(hoursRef, { signin: Math.floor(new Date().getTime() / 1000) }, { merge: true });
+    const date = new Date();
+    setDoc(hoursRef, { 
+      signin: Math.floor(date.getTime() / 1000),
+      meetings: arrayUnion((date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear())
+    }, { merge: true });
+    
   });}
 
 export const signOut = async (user) => {
