@@ -2,8 +2,11 @@ import Header from "../components/Header";
 import { Button, Dropdown } from "react-bootstrap";
 import "../index.css";
 import {
+    addHours,
     getAllUsers,
     getRank,
+    signIn,
+    signOut,
 } from "../firebase.jsx"
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -14,7 +17,9 @@ export default function Home() {
     const [searchQuery, setSearchQuery] = useState("");
     const [dropdown, setDropdown] = useState("Pick User");
     const [showGreeting, setShowGreeting] = useState(false);
+    const [signMessage, setSignMessage] = useState("Sign In");
 
+    const maxHours = 4;
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -24,6 +29,29 @@ export default function Home() {
 
         resolveUsers();
     });
+
+    const useUser = (user) => {
+        setUser(user);
+        setDropdown(user.name);
+        setShowGreeting(true);
+        setSignMessage(user.signin > 0 ? "Sign Out" : "Sign In");
+    }
+
+    const signInOut = () => {
+        if (user.signin) {
+            let calcHours = Math.floor(((new Date().getTime() / 1000) - user.signin) / 3600);
+            if (calcHours > 0) {
+                if (calcHours > maxHours) calcHours = maxHours;
+                
+                addHours(user, calcHours);
+            }
+            signOut(user);
+            setUser({ name: user.name, hours: user.hours + calcHours, meetings: user.meetings});
+        } else {
+            signIn(user);
+            setUser({ name: user.name, hours: user.hours, meetings: user.meetings, signin: Math.floor(new Date().getTime() / 1000)});
+        }
+    }
 
     return (
         <>
@@ -43,11 +71,11 @@ export default function Home() {
                             onChange={(e) => setSearchQuery(e.target.value)}
                             ></input>
                             {
-                                users.filter((user) =>
-                                    user.name.toLowerCase().includes(searchQuery.toLowerCase())
-                                ).map((user, index) => {
+                                users.filter((user) => {
+                                    return user.name.toLowerCase().includes(searchQuery.toLowerCase())
+                                }).map((user, index) => {
                                     return (
-                                    <Dropdown.Item onClick={() => {setUser(user); setDropdown(user.name); setShowGreeting(true)}} key={index}>
+                                    <Dropdown.Item onClick={() => { useUser(user) }} key={index}>
                                         {user.name}
                                     </Dropdown.Item>
                                     );
@@ -60,17 +88,17 @@ export default function Home() {
                 {showGreeting && 
                 <>
                     <div className="greeting">
-                        <h2>Hi <span style={{textDecoration: "underline"}}>{user.name}</span>!</h2>
+                        <h2>Hi <span style={{ textDecoration: "underline" }}>{user.name}</span>!</h2>
                     </div>
 
                     <div className="statistics">
                         <p className="stat">Your Hours This Season: {user.hours}</p>
                         <p className="stat">Your Meetings Attended: {user.meetings.length}</p>
-                        <p className="stat">Your Hours Rank (Out of 71): #{getRank(users, user)}</p>
+                        <p className="stat">Your Hours Rank (Out of 71): #{ getRank(users, user) }</p>
                     </div>
 
                     <div className="sign-button-container">
-                        <Button className="sign-button">Sign In</Button>
+                        <Button className="sign-button" onClick={signInOut}>{signMessage}</Button>
                     </div>
                 </>
                 }

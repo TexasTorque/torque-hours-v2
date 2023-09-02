@@ -3,6 +3,9 @@ import {
     getFirestore,
     collection,
     getDocs,
+    doc,
+    setDoc,
+    deleteField,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -20,6 +23,15 @@ const db = getFirestore(app);
 
 export const getUser = (users, name) => {
   return users.filter((doc) => doc.name === name)[0];
+}
+
+const getUID = async (name) => {
+  const hoursRef = collection(db, "hours");
+  const hoursSnap = await getDocs(hoursRef);
+  
+  return hoursSnap.docs
+    .filter((doc) => doc.data().name === name)
+    .map((doc) => doc.id)[0];
 }
 
 export const getAllUsers = async () => {
@@ -42,4 +54,24 @@ export const getRank = (users, user) => {
   else if (rank === 3) return rank + " 🥉";
   else if (rank === users.length - 1) return rank + " 😭 ";
   else return rank;
+}
+
+export const addHours = async (user, hours) => {
+  await getUID(user.name).then((val) => {
+    const hoursRef = doc(db, 'hours', val);
+    setDoc(hoursRef, { hours: user.hours + hours }, { merge: true });
+  });
+}
+
+export const signIn = async (user) => {
+  await getUID(user.name).then((val) => {
+    const hoursRef = doc(db, 'hours', val);
+    setDoc(hoursRef, { signin: Math.floor(new Date().getTime() / 1000) }, { merge: true });
+  });}
+
+export const signOut = async (user) => {
+  await getUID(user.name).then(async (val) => {
+    const hoursRef = doc(db, 'hours', val);
+    setDoc(hoursRef, { signin: deleteField() }, { merge: true });
+  });
 }
