@@ -134,7 +134,7 @@ export default function Admin() {
             <div className="footer-buttons">
                 <Button className="footer-button" onClick={() => navigate("/leaderboard")}>Leaderboard</Button>
                 <Button className="footer-button" onClick={() => navigate("/")}>Home</Button>
-                <Button className="footer-button" onClick={() => navigate("/attendance")}>Attentance</Button>
+                <Button className="footer-button" onClick={() => navigate("/attendance")}>Attendance</Button>
             </div>
         </>
     )
