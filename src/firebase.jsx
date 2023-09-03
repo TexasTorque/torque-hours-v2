@@ -7,7 +7,7 @@ import {
     setDoc,
     deleteField,
     arrayUnion,
-
+    addDoc,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -52,7 +52,7 @@ export const getRank = (users, user) => {
   });
 
   if (rank === 1) return rank + " 👑";
-  else if (rank === users.length - 1) return rank + " 😭";
+  else if (rank === users.length) return rank + " 😭";
   else if (rank === 2) return rank + " 🥈";
   else if (rank === 3) return rank + " 🥉";
   else return rank;
@@ -116,4 +116,8 @@ export const setVolunteerHours = async (user, volunteerHours) => {
       volunteer: volunteerHours
     }, { merge: true });
   });
+}
+
+export const createUser = async (name) => {
+  await addDoc(collection(db, "hours"), {name: name, hours: 0, meetings: [], volunteer: 0});
 }

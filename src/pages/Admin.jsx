@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import default_user from "../assets/default_user.png"
 import {
     getAllUsers,
+    createUser,
 } from "../firebase";
 import EditUser from "../components/EditUser";
 
@@ -27,14 +28,16 @@ export default function Admin() {
     const navigate = useNavigate();
 
     const setSearch = (search) => {
+        if (search === "") {setUser({}); return; }
         if (users.filter(user => user.name.toLowerCase() === search.toLowerCase())[0]) {
             setUser(users.filter(user => user.name.toLowerCase() === search.toLowerCase())[0]);
         } else {
-            setUser({});
+            setUser({create: true, name: search});
         }
     }
 
     const saveUser = (newUser) => {
+        if (user.name === newUser.name && user.hours === newUser.hours && user.meetings === newUser.meetings && user.volunteer === newUser.volunteer) return;
         const i = users.indexOf(user);
 
         let newUsers = users;
@@ -45,6 +48,16 @@ export default function Admin() {
         document.getElementById("main-search").value = newUser.name;
 
         setUser(newUser);
+    }
+
+    const addUser = (user) => {
+        console.log(user);
+        let newUsers = users;
+        newUsers.push(user);
+
+        setUsers(newUsers);
+
+        setUser(user);
     }
 
     return (
@@ -84,10 +97,25 @@ export default function Admin() {
                 </InputGroup>
             </div>
 
-            {user.name && 
+            {user.create && 
                 <div className="center">
                     <img src={default_user} alt="" style={{borderRadius: "500px", width: "200px"}}/>
-                    <h3 style={{ color: "white", marginTop: ".25em"}}>{user.name}</h3>
+                    <h3 style={{ color: "white", marginTop: ".25em", textDecoration: "underline"}}>{user.name}</h3>
+
+                    <div className="statistics">
+                        <p className="stat">Recorded Hours: 0</p>   
+                        <p className="stat">Volunteer Hours: 0</p>   
+                        <p className="stat">Meetings Attended: 0</p>   
+                    </div>
+                    
+                    <Button className="edit-button" onClick={() => { createUser(user.name); addUser({name: user.name, hours: 0, meetings: [], volunteer: 0}) }}>Create User</Button>
+                </div>
+            }
+
+            {user.hours >= -99999999 && 
+                <div className="center">
+                    <img src={default_user} alt="" style={{borderRadius: "500px", width: "200px"}}/>
+                    <h3 style={{ color: "white", marginTop: ".25em", textDecoration: "underline"}}>{user.name}</h3>
 
                     <div className="statistics">
                         <p className="stat">Recorded Hours: {user.hours}</p>   
@@ -104,7 +132,7 @@ export default function Admin() {
             <div className="footer-buttons">
                 <Button className="footer-button" onClick={() => navigate("/leaderboard")}>Leaderboard</Button>
                 <Button className="footer-button" onClick={() => navigate("/")}>Home</Button>
-                <Button className="footer-button" onClick={() => navigate("/attentance")}>Attentance</Button>
+                <Button className="footer-button" onClick={() => navigate("/attendance")}>Attentance</Button>
             </div>
         </>
     )
