@@ -63,9 +63,9 @@ body {
 }
 
 .select-user-group {
-  width: 30%;
   margin-top: 3em;
-  margin-left: 35%;
+  margin-left: 25%;
+  margin-right: 25%;
 }
 
 .hours-cell {
@@ -126,7 +126,8 @@ body {
   bottom: 0px;
   left: 50%;
   transform: translate(-50%, -50%);
-  align-items: center;
+  display: flex;
+  justify-content: center;
 }
 
 .footer-buttons-free {
