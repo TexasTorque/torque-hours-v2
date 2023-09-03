@@ -89,15 +89,17 @@ export default function Home() {
                             onChange={(e) => setSearchQuery(e.target.value)}
                             ></input>
                             {
-                                users.filter((user) => {
-                                    return user.name.toLowerCase().includes(searchQuery.toLowerCase())
-                                }).map((user, index) => {
-                                    return (
-                                    <Dropdown.Item onClick={() => { useUser(user) }} key={index}>
-                                        {user.name}
-                                    </Dropdown.Item>
-                                    );
-                                })
+                                users
+                                    .filter((user) => user.name.toLowerCase().includes(searchQuery.toLowerCase()))
+                                    .sort((a, b) => a.name.localeCompare(b.name))
+                                    .map((user, index) => {
+                                        return (
+                                            <Dropdown.Item onClick={() => { useUser(user) }} key={index}>
+                                                {user.name}
+                                            </Dropdown.Item>
+                                        );
+                                    }
+                                )
                             }
                         </Dropdown.Menu>
                     </Dropdown>

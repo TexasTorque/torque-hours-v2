@@ -82,15 +82,17 @@ export default function Admin() {
                                 onChange={(e) => setSearchQuery(e.target.value)}
                             ></input>
                             { 
-                                users.filter((user) => {
-                                    return user.name.toLowerCase().includes(searchQuery.toLowerCase())
-                                }).map((user, index) => {
-                                    return (
-                                    <Dropdown.Item key={index} onClick={(e) => { e.target.parentNode.parentNode.children[0].value=user.name; setEditUser({}); setUser(user)}}>
-                                        {user.name}
-                                    </Dropdown.Item>
-                                    );
-                                })
+                                users
+                                    .filter((user) => user.name.toLowerCase().includes(searchQuery.toLowerCase()))
+                                    .sort((a, b) => a.name.localeCompare(b.name))
+                                    .map((user, index) => {
+                                        return (
+                                            <Dropdown.Item key={index} onClick={(e) => { e.target.parentNode.parentNode.children[0].value=user.name; setEditUser({}); setUser(user)}}>
+                                                {user.name}
+                                            </Dropdown.Item>
+                                        );
+                                    }
+                                )
                             }
                         </Dropdown.Menu>
                     </Dropdown>
