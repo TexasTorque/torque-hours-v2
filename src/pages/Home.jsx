@@ -28,7 +28,7 @@ export default function Home() {
         }
 
         resolveUsers();
-    });
+    }, []);
 
     const useUser = (user) => {
         setUser(user);
@@ -46,13 +46,29 @@ export default function Home() {
                 addHours(user, calcHours);
             }
             signOut(user);
-            setUser({ name: user.name, hours: user.hours + calcHours, meetings: user.meetings});
+            setUser({ name: user.name, volunteer: user.volunteer, hours: user.hours + calcHours, meetings: user.meetings});
             setSignMessage("Sign In");
         } else {
             signIn(user);
-            setUser({ name: user.name, hours: user.hours, meetings: user.meetings, signin: Math.floor(new Date().getTime() / 1000)});
+            setUser({ name: user.name, volunteer: user.volunteer, hours: user.hours, meetings: user.meetings, signin: Math.floor(new Date().getTime() / 1000)});
             setSignMessage("Sign Out");
         }
+    }
+
+    const secondsToTime = (seconds) => {
+        let output = "";
+        let minutes = Math.floor(seconds / 60);
+        let hours = Math.floor(minutes / 60);
+        minutes -= hours * 60;
+
+        if (hours > 0) {
+            output += hours + "h ";
+        }
+        if (minutes > 0) {
+            output += minutes + "m";
+        }
+        if (output === "") return "0m";
+        return output;
     }
 
     return (
@@ -61,7 +77,7 @@ export default function Home() {
             <div className="main">
                 <div className="select-name">
                     <h1 className="name-prompt">Select Your Name:</h1>
-                    <Dropdown className="dropdown-button" onBlur={() => setSearchQuery("")}>
+                    <Dropdown className="dropdown-button">
                         <Dropdown.Toggle variant="primary">
                             { dropdown }
                         </Dropdown.Toggle>
@@ -96,7 +112,11 @@ export default function Home() {
                     <div className="statistics">
                         <p className="stat">Your Hours This Season: {user.hours}</p>
                         <p className="stat">Your Meetings Attended: {user.meetings.length}</p>
-                        <p className="stat">Your Hours Rank (Out of 71): #{ getRank(users, user) }</p>
+                        <p className="stat">Your Hours Rank (Out of {users.length}): #{ getRank(users, user) }</p>
+                        <br></br>
+                        {user.signin &&
+                            <p className="stat">Signed In Time: {secondsToTime(Math.floor(new Date().getTime() / 1000) - user.signin)}</p>
+                        }
                     </div>
 
                     <div className="sign-button-container">

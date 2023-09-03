@@ -7,6 +7,7 @@ import {
     setDoc,
     deleteField,
     arrayUnion,
+
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -51,9 +52,9 @@ export const getRank = (users, user) => {
   });
 
   if (rank === 1) return rank + " 👑";
+  else if (rank === users.length - 1) return rank + " 😭";
   else if (rank === 2) return rank + " 🥈";
   else if (rank === 3) return rank + " 🥉";
-  else if (rank === users.length - 1) return rank + " 😭 ";
   else return rank;
 }
 
@@ -80,4 +81,12 @@ export const signOut = async (user) => {
     const hoursRef = doc(db, 'hours', val);
     setDoc(hoursRef, { signin: deleteField() }, { merge: true });
   });
+}
+
+export const checkPassword = async (password) => {
+  const passwordSnap = await getDocs(collection(db, "settings"));
+  return (
+    password ===
+    passwordSnap.docs[0]._document.data.value.mapValue.fields.password.stringValue
+  );
 }

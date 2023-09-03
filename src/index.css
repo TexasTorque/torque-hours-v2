@@ -54,6 +54,30 @@ body {
   align-items: center;
 }
 
+.select-user-group {
+  width: 30%;
+  margin-top: 3em;
+  margin-left: 35%;
+}
+
+.hours-cell {
+  text-align: center;
+  font-weight: 400;
+}
+
+.hours-table {
+  margin-left: 5%;
+  margin-top: 2em;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2em;
+}
+
 .greeting {
   display: flex;
   justify-content: center;
@@ -67,6 +91,10 @@ body {
   text-align: center;
   justify-content: center;
   color: white;
+}
+
+.edit-button {
+  margin-top: 1em;
 }
 
 .stat {
