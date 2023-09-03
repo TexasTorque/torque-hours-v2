@@ -73,8 +73,8 @@ export const signIn = async (user) => {
       signin: Math.floor(date.getTime() / 1000),
       meetings: arrayUnion((date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear())
     }, { merge: true });
-    
-  });}
+  });
+}
 
 export const signOut = async (user) => {
   await getUID(user.name).then(async (val) => {
@@ -89,4 +89,31 @@ export const checkPassword = async (password) => {
     password ===
     passwordSnap.docs[0]._document.data.value.mapValue.fields.password.stringValue
   );
+}
+
+export const setName = async (user, newName) => {
+  await getUID(user.name).then((val) => {
+    const hoursRef = doc(db, 'hours', val);
+    setDoc(hoursRef, { 
+      name: newName
+    }, { merge: true });
+  });
+}
+
+export const setHours = async (user, newHours) => {
+  await getUID(user.name).then((val) => {
+    const hoursRef = doc(db, 'hours', val);
+    setDoc(hoursRef, { 
+      hours: newHours
+    }, { merge: true });
+  });
+}
+
+export const setVolunteerHours = async (user, volunteerHours) => {
+  await getUID(user.name).then((val) => {
+    const hoursRef = doc(db, 'hours', val);
+    setDoc(hoursRef, { 
+      volunteer: volunteerHours
+    }, { merge: true });
+  });
 }

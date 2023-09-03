@@ -8,10 +8,12 @@ import default_user from "../assets/default_user.png"
 import {
     getAllUsers,
 } from "../firebase";
+import EditUser from "../components/EditUser";
 
 export default function Admin() {
     const [users, setUsers] = useState([]);
     const [user, setUser] = useState({});
+    const [editUser, setEditUser] = useState({});
     const [searchQuery, setSearchQuery] = useState("");
 
     useEffect(() => {
@@ -32,6 +34,19 @@ export default function Admin() {
         }
     }
 
+    const saveUser = (newUser) => {
+        const i = users.indexOf(user);
+
+        let newUsers = users;
+        newUsers[i] = newUser;
+
+        setUsers(newUsers);
+
+        document.getElementById("main-search").value = newUser.name;
+
+        setUser(newUser);
+    }
+
     return (
         <>
             <Header />
@@ -40,6 +55,7 @@ export default function Admin() {
             <div className="select-user-group">
                 <InputGroup>
                     <Form.Control
+                        id="main-search"
                         placeholder="Enter Name or Select from Dropdown"
                         onChange={(e) => setSearch(e.target.value)}
                     />
@@ -57,7 +73,7 @@ export default function Admin() {
                                     return user.name.toLowerCase().includes(searchQuery.toLowerCase())
                                 }).map((user, index) => {
                                     return (
-                                    <Dropdown.Item key={index} onClick={(e) => { e.target.parentNode.parentNode.children[0].value=user.name; setUser(user)}}>
+                                    <Dropdown.Item key={index} onClick={(e) => { e.target.parentNode.parentNode.children[0].value=user.name; setEditUser({}); setUser(user)}}>
                                         {user.name}
                                     </Dropdown.Item>
                                     );
@@ -79,9 +95,11 @@ export default function Admin() {
                         <p className="stat">Meetings Attended: {user.meetings.length}</p>   
                     </div>
                     
-                    <Button className="edit-button">Edit User</Button>
+                    <Button className="edit-button" onClick={() => setEditUser(user) }>Edit User</Button>
                 </div>
             }
+
+            <EditUser user={editUser} setEditUser={setEditUser} saveUser={saveUser}/>
 
             <div className="footer-buttons">
                 <Button className="footer-button" onClick={() => navigate("/leaderboard")}>Leaderboard</Button>
