@@ -104,7 +104,7 @@ export const setHours = async (user, newHours) => {
   await getUID(user.name).then((val) => {
     const hoursRef = doc(db, 'hours', val);
     setDoc(hoursRef, { 
-      hours: newHours
+      hours: Number(newHours)
     }, { merge: true });
   });
 }
@@ -113,7 +113,7 @@ export const setVolunteerHours = async (user, volunteerHours) => {
   await getUID(user.name).then((val) => {
     const hoursRef = doc(db, 'hours', val);
     setDoc(hoursRef, { 
-      volunteer: volunteerHours
+      volunteer: Number(volunteerHours)
     }, { merge: true });
   });
 }

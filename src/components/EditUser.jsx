@@ -13,7 +13,7 @@ export default function EditUser({ user, setEditUser, saveUser }) {
         setHours(user, newHours);
         setVolunteerHours(user, newVolunteerHours);
 
-        saveUser({name: newName, hours: newHours, volunteer: newVolunteerHours, meetings: user.meetings});
+        saveUser({name: newName, hours: Number(newHours), volunteer: Number(newVolunteerHours), meetings: user.meetings});
 
         setEditUser({});
     }

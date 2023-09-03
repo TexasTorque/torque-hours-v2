@@ -51,7 +51,6 @@ export default function Admin() {
     }
 
     const addUser = (user) => {
-        console.log(user);
         let newUsers = users;
         newUsers.push(user);
 
