@@ -62,6 +62,10 @@ body {
   max-height: 300px;
 }
 
+.dropdown-search {
+  margin-left: 4px;
+}
+
 .select-user-group {
   margin-top: 3em;
   margin-left: 25%;
