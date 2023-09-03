@@ -1,12 +1,15 @@
 body {
   background-color: black !important;
-  overflow-y: scroll;
 }
 
 @font-face {
   font-family: "Market_Deco";
   src: local("Market_Deco"), url("./assets/fonts/Market_Deco.ttf") format("truetype");
   font-weight: bold;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 .main {
@@ -52,6 +55,11 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.dropdown-menu {
+  overflow-y: scroll;
+  max-height: 300px;
 }
 
 .select-user-group {
@@ -119,6 +127,17 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   align-items: center;
+}
+
+.footer-buttons-free {
+  display: flex;
+  justify-content: center;
+}
+
+.footer-button-free {
+  margin-bottom: 1.75em;
+  margin-left: .25em;
+  margin-right: .25em;
 }
 
 .footer-button {

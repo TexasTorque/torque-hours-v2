@@ -27,7 +27,7 @@ export default function Leaderboard() {
         else if (rank === users.length) return " 😭";
         else if (rank === 2) return " 🥈";
         else if (rank === 3) return " 🥉";
-        else return rank;
+        else return "";
     }
 
     return (
@@ -59,10 +59,10 @@ export default function Leaderboard() {
                     }
                 </tbody>
             </Table>
-            <div className="footer-buttons">
-                <Button className="footer-button" onClick={() => navigate("/attendance")}>Attendance</Button>
-                <Button className="footer-button" onClick={() => navigate("/")}>Home</Button>
-                <Button className="footer-button" onClick={() => navigate("/admin")}>Admin</Button>
+            <div className="footer-buttons-free">
+                <Button className="footer-button-free" onClick={() => navigate("/attendance")}>Attendance</Button>
+                <Button className="footer-button-free" onClick={() => navigate("/")}>Home</Button>
+                <Button className="footer-button-free" onClick={() => navigate("/admin")}>Admin</Button>
             </div>
         </>
     );
