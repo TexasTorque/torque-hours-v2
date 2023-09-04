@@ -7,6 +7,8 @@ import {
     getRank,
     signIn,
     signOut,
+    getUID,
+    getUserFromUID,
 } from "../firebase.jsx"
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -28,6 +30,10 @@ export default function Home() {
         }
 
         resolveUsers();
+
+        if (localStorage.getItem("user")) {
+            getUserFromUID(localStorage.getItem("user")).then(useUser);
+        }
     }, []);
 
     const useUser = (user) => {
@@ -35,6 +41,8 @@ export default function Home() {
         setDropdown(user.name);
         setShowGreeting(true);
         setSignMessage(user.signin > 0 ? "Sign Out" : "Sign In");
+
+        getUID(user.name).then(uid => localStorage.setItem("user", uid));
     }
 
     const signInOut = () => {

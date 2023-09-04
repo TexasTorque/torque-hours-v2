@@ -24,10 +24,19 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 export const getUser = (users, name) => {
-  return users.filter((doc) => doc.name === name)[0];
+  return users.filter((user) => user.name === name)[0];
 }
 
-const getUID = async (name) => {
+export const getUserFromUID = async (uid) => {
+  const hoursRef = collection(db, "hours");
+  const hoursSnap = await getDocs(hoursRef);
+  
+  return hoursSnap.docs
+    .filter((doc) => doc.id === uid)
+    .map((doc) => doc.data())[0];
+}
+
+export const getUID = async (name) => {
   const hoursRef = collection(db, "hours");
   const hoursSnap = await getDocs(hoursRef);
   
