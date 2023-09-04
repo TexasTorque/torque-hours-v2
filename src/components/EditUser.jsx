@@ -1,19 +1,20 @@
-import { Modal, Button } from "react-bootstrap";
+import { Modal, Button, Dropdown } from "react-bootstrap";
 import { 
     setHours,
     setVolunteerHours,
     setName,
-    getAllUsers,
+    setMeetings,
  } from "../firebase";
 
 export default function EditUser({ user, setEditUser, saveUser }) {
 
-    const save = (newName, newHours, newVolunteerHours) => {
+    const save = (newName, newHours, newVolunteerHours, newMeetings) => {
         setName(user, newName);
         setHours(user, newHours);
         setVolunteerHours(user, newVolunteerHours);
+        setMeetings(user, newMeetings.split(", "));
 
-        saveUser({name: newName, hours: Number(newHours), volunteer: Number(newVolunteerHours), meetings: user.meetings});
+        saveUser({name: newName, hours: Number(newHours), volunteer: Number(newVolunteerHours), meetings: newMeetings.split(", ")});
 
         setEditUser({});
     }
@@ -71,7 +72,19 @@ export default function EditUser({ user, setEditUser, saveUser }) {
                         />
                     </div>
                     <div>
-                        <Button style={{marginTop: "1em", float: "right"}} onClick={(e) => save(e.target.parentNode.parentNode.children[0].children[1].value, e.target.parentNode.parentNode.children[1].children[1].value, e.target.parentNode.parentNode.children[2].children[1].value)}>
+                        <label
+                            style={{fontSize: 22, fontWeight: 500}}
+                        >
+                        Meetings Attended:
+                        </label>
+                        <input
+                            name="name"
+                            style={{marginLeft: "10px", float: "right"}}
+                            defaultValue={String(user.meetings).replaceAll(",", ", ")}
+                        />
+                    </div>
+                    <div>
+                        <Button style={{marginTop: "1em", float: "right"}} onClick={(e) => save(e.target.parentNode.parentNode.children[0].children[1].value, e.target.parentNode.parentNode.children[1].children[1].value, e.target.parentNode.parentNode.children[2].children[1].value, e.target.parentNode.parentNode.children[3].children[1].value)}>
                             Save Changes
                         </Button>
                     </div>

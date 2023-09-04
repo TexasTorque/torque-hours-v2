@@ -118,6 +118,15 @@ export const setVolunteerHours = async (user, volunteerHours) => {
   });
 }
 
+export const setMeetings = async (user, newMeetings) => {
+  await getUID(user.name).then((val) => {
+    const hoursRef = doc(db, 'hours', val);
+    setDoc(hoursRef, { 
+      meetings: newMeetings
+    }, { merge: true });
+  });
+}
+
 export const createUser = async (name) => {
   await addDoc(collection(db, "hours"), {name: name, hours: 0, meetings: [], volunteer: 0});
 }
