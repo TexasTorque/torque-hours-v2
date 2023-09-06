@@ -68,7 +68,7 @@ export default function Admin() {
                 <InputGroup>
                     <Form.Control
                         id="main-search"
-                        placeholder="Enter Name or Select from Dropdown"
+                        placeholder="Select or Enter Name"
                         onChange={(e) => setSearch(e.target.value)}
                     />
                     <Dropdown className="dropdown-button">

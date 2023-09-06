@@ -1,21 +1,14 @@
 import { Modal, Button, Dropdown } from "react-bootstrap";
 import { 
-    setHours,
-    setVolunteerHours,
-    setName,
-    setMeetings,
+    setStats,
  } from "../firebase";
 
 export default function EditUser({ user, setEditUser, saveUser }) {
 
     const save = (newName, newHours, newVolunteerHours, newMeetings) => {
-        setName(user, newName);
-        setHours(user, newHours);
-        setVolunteerHours(user, newVolunteerHours);
-        setMeetings(user, newMeetings.split(", "));
+        setStats(user, Number(newName), Number(newHours), Number(newVolunteerHours), newMeetings.split(", "))
 
         saveUser({name: newName, hours: Number(newHours), volunteer: Number(newVolunteerHours), meetings: newMeetings.split(", ")});
-
         setEditUser({});
     }
 
@@ -85,7 +78,7 @@ export default function EditUser({ user, setEditUser, saveUser }) {
                     </div>
                     <div>
                         <Button style={{marginTop: "1em", float: "right"}} onClick={(e) => save(e.target.parentNode.parentNode.children[0].children[1].value, e.target.parentNode.parentNode.children[1].children[1].value, e.target.parentNode.parentNode.children[2].children[1].value, e.target.parentNode.parentNode.children[3].children[1].value)}>
-                            Save Changes
+                            Save
                         </Button>
                     </div>
                 </Modal.Body>

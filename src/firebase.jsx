@@ -100,37 +100,13 @@ export const checkPassword = async (password) => {
   );
 }
 
-export const setName = async (user, newName) => {
+export const setStats = async (user, newName, newHours, volunteerHours, newMeetings) => {
   await getUID(user.name).then((val) => {
     const hoursRef = doc(db, 'hours', val);
     setDoc(hoursRef, { 
-      name: newName
-    }, { merge: true });
-  });
-}
-
-export const setHours = async (user, newHours) => {
-  await getUID(user.name).then((val) => {
-    const hoursRef = doc(db, 'hours', val);
-    setDoc(hoursRef, { 
-      hours: Number(newHours)
-    }, { merge: true });
-  });
-}
-
-export const setVolunteerHours = async (user, volunteerHours) => {
-  await getUID(user.name).then((val) => {
-    const hoursRef = doc(db, 'hours', val);
-    setDoc(hoursRef, { 
-      volunteer: Number(volunteerHours)
-    }, { merge: true });
-  });
-}
-
-export const setMeetings = async (user, newMeetings) => {
-  await getUID(user.name).then((val) => {
-    const hoursRef = doc(db, 'hours', val);
-    setDoc(hoursRef, { 
+      name: newName,
+      hours: newHours,
+      volunteer: volunteerHours,
       meetings: newMeetings
     }, { merge: true });
   });
