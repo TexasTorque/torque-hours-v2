@@ -68,8 +68,9 @@ body {
 
 .select-user-group {
   margin-top: 3em;
-  margin-left: 25%;
-  margin-right: 25%;
+  width: 25rem;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .hours-cell {

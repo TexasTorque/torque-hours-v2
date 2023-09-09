@@ -40,14 +40,6 @@ export default function Attendance() {
         return output;
     }
 
-    const getRank = (rank) => {
-        if (rank === 1) return " 👑";
-        else if (rank === users.length) return " 😭";
-        else if (rank === 2) return " 🥈";
-        else if (rank === 3) return " 🥉";
-        else return rank;
-    }
-
     return (
         <>
             <Header />
@@ -61,14 +53,14 @@ export default function Attendance() {
                 <thead>
                     <tr style={{ textAlign: "center" }}>
                         <th style={{ color: "white", backgroundColor: "black"}}>Name</th>
-                        <th style={{ color: "white", backgroundColor: "black", width: "15em"}}>Signed In Time</th>
+                        <th style={{ color: "white", backgroundColor: "black", width: "9rem"}}>Signed In Time</th>
                     </tr>
                 </thead>
                 <tbody>
                     {users
                         .map((user, index) => (
                             <tr key={index}>
-                                <th className="hours-cell" style={{ color: "white", backgroundColor: "black"}}>{user.name + getRank(index + 1)}</th>
+                                <th className="hours-cell" style={{ color: "white", backgroundColor: "black"}}>{user.name}</th>
                                 <th className="hours-cell" style={{ color: "white", backgroundColor: "black"}}>{secondsToTime(Math.floor(new Date().getTime() / 1000) - user.signin)}</th>
                             </tr>
                         ))

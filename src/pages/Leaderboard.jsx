@@ -42,9 +42,9 @@ export default function Leaderboard() {
             >
                 <thead>
                     <tr style={{ textAlign: "center" }}>
-                        <th style={{ color: "white", backgroundColor: "black", width: "10em"}}>Rank</th>
-                        <th style={{ color: "white", backgroundColor: "black"}}>Name</th>
-                        <th style={{ color: "white", backgroundColor: "black", width: "10em"}}>Hours</th>
+                        <th style={{ color: "white", backgroundColor: "black", width: "10%"}}>Rank</th>
+                        <th style={{ color: "white", backgroundColor: "black", width: "70%"}}>Name</th>
+                        <th style={{ color: "white", backgroundColor: "black", width: "10%"}}>Hours</th>
                     </tr>
                 </thead>
                 <tbody>
