@@ -39,6 +39,9 @@ export default function Admin() {
     const saveUser = (newUser) => {
         if (user.name === newUser.name && user.hours === newUser.hours && user.meetings === newUser.meetings && user.volunteer === newUser.volunteer) return;
         const i = users.indexOf(user);
+        if (i == -1) {
+            return;
+        }
 
         let newUsers = users;
         newUsers[i] = newUser;
@@ -119,10 +122,11 @@ export default function Admin() {
                     <h3 style={{ color: "white", marginTop: ".25em", textDecoration: "underline"}}>{user.name}</h3>
                     <p style={{ color: "white"}}>{user.uid}</p>
 
-                    <div className="statistics">
+                    <div className="statistics" style={{marginTop: "-10px"}}>
                         <p className="stat">Recorded Hours: {user.hours}</p>   
                         <p className="stat">Volunteer Hours: {user.volunteer}</p>   
                         <p className="stat">Meetings Attended: {user.meetings.length}</p>   
+                        <p className="stat">Graduation Year: {user.graduation}</p>   
                     </div>
                     
                     <Button className="edit-button" onClick={() => setEditUser(user) }>Edit User</Button>

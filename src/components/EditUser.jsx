@@ -1,6 +1,7 @@
 import { Modal, Button } from "react-bootstrap";
 import { 
     setStats,
+    deleteUser,
  } from "../firebase";
 
 export default function EditUser({ user, setEditUser, saveUser }) {
@@ -8,7 +9,7 @@ export default function EditUser({ user, setEditUser, saveUser }) {
     const save = (newName, newHours, newVolunteerHours, newMeetings) => {
         setStats(user, Number(newName), Number(newHours), Number(newVolunteerHours), newMeetings.split(", "))
 
-        saveUser({name: newName, hours: Number(newHours), volunteer: Number(newVolunteerHours), meetings: newMeetings.split(", ")});
+        saveUser({name: newName, hours: Number(newHours), volunteer: Number(newVolunteerHours), meetings: newMeetings.split(", "), uid: user.uid});
         setEditUser({});
     }
 
@@ -77,7 +78,19 @@ export default function EditUser({ user, setEditUser, saveUser }) {
                         />
                     </div>
                     <div>
-                        <Button style={{marginTop: "1em", float: "right"}} onClick={(e) => save(e.target.parentNode.parentNode.children[0].children[1].value, e.target.parentNode.parentNode.children[1].children[1].value, e.target.parentNode.parentNode.children[2].children[1].value, e.target.parentNode.parentNode.children[3].children[1].value)}>
+                        <label
+                            style={{fontSize: 22, fontWeight: 500}}
+                        >
+                        Graduation Year:
+                        </label>
+                        <input
+                            name="name"
+                            style={{marginLeft: "10px", float: "right"}}
+                            defaultValue={user.graduation}
+                        />
+                    </div>
+                    <div>
+                        <Button variant="success" style={{marginTop: "1em", float: "right"}} onClick={(e) => save(e.target.parentNode.parentNode.children[0].children[1].value, e.target.parentNode.parentNode.children[1].children[1].value, e.target.parentNode.parentNode.children[2].children[1].value, e.target.parentNode.parentNode.children[3].children[1].value)}>
                             Save
                         </Button>
                     </div>

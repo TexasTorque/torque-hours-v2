@@ -98,7 +98,7 @@ body {
 }
 
 .statistics {
-  margin-top: 1.5em;
+  margin-top: 30px;
   display: flex;
   flex-direction: column;
   text-align: center;
