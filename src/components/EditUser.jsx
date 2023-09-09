@@ -1,7 +1,6 @@
 import { Modal, Button } from "react-bootstrap";
 import { 
     setStats,
-    deleteUser,
  } from "../firebase";
 
 export default function EditUser({ user, setEditUser, saveUser }) {
