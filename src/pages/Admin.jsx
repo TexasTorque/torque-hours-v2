@@ -117,6 +117,7 @@ export default function Admin() {
                 <div className="center">
                     <img src={default_user} alt="" style={{borderRadius: "500px", width: "200px"}}/>
                     <h3 style={{ color: "white", marginTop: ".25em", textDecoration: "underline"}}>{user.name}</h3>
+                    <p style={{ color: "white"}}>{user.uid}</p>
 
                     <div className="statistics">
                         <p className="stat">Recorded Hours: {user.hours}</p>   

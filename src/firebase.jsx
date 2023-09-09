@@ -36,15 +36,6 @@ export const getUserFromUID = async (uid) => {
     .map((doc) => doc.data())[0];
 }
 
-export const getUID = async (name) => {
-  const hoursRef = collection(db, "hours");
-  const hoursSnap = await getDocs(hoursRef);
-  
-  return hoursSnap.docs
-    .filter((doc) => doc.data().name === name)
-    .map((doc) => doc.id)[0];
-}
-
 export const getAllUsers = async () => {
   const hoursRef = collection(db, "hours");
   const hoursSnap = await getDocs(hoursRef);
@@ -68,50 +59,41 @@ export const getRank = (users, user) => {
 }
 
 export const addHours = async (user, hours) => {
-  await getUID(user.name).then((val) => {
-    const hoursRef = doc(db, 'hours', val);
-    setDoc(hoursRef, { hours: user.hours + hours }, { merge: true });
-  });
+  const hoursRef = doc(db, 'hours', user.uid);
+  setDoc(hoursRef, { hours: user.hours + hours }, { merge: true });
 }
 
 export const signIn = async (user) => {
-  await getUID(user.name).then((val) => {
-    const hoursRef = doc(db, 'hours', val);
-    const date = new Date();
-    setDoc(hoursRef, { 
-      signin: Math.floor(date.getTime() / 1000),
-      meetings: arrayUnion((date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear())
-    }, { merge: true });
-  });
+  const hoursRef = doc(db, 'hours', user.uid);
+  const date = new Date();
+  setDoc(hoursRef, { 
+    signin: Math.floor(date.getTime() / 1000),
+    meetings: arrayUnion((date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear())
+  }, { merge: true });
 }
 
 export const signOut = async (user) => {
-  await getUID(user.name).then(async (val) => {
-    const hoursRef = doc(db, 'hours', val);
-    setDoc(hoursRef, { signin: deleteField() }, { merge: true });
-  });
+  const hoursRef = doc(db, 'hours', user.uid);
+  setDoc(hoursRef, { signin: deleteField() }, { merge: true });
 }
 
 export const checkPassword = async (password) => {
   const passwordSnap = await getDocs(collection(db, "settings"));
-  return (
-    password ===
-    passwordSnap.docs[0]._document.data.value.mapValue.fields.password.stringValue
-  );
+  return password === passwordSnap.docs[0]._document.data.value.mapValue.fields.password.stringValue;
 }
 
 export const setStats = async (user, newName, newHours, volunteerHours, newMeetings) => {
-  await getUID(user.name).then((val) => {
-    const hoursRef = doc(db, 'hours', val);
-    setDoc(hoursRef, { 
-      name: newName,
-      hours: newHours,
-      volunteer: volunteerHours,
-      meetings: newMeetings
-    }, { merge: true });
-  });
+  const hoursRef = doc(db, 'hours', user.uid);
+  setDoc(hoursRef, { 
+    name: newName,
+    hours: newHours,
+    volunteer: volunteerHours,
+    meetings: newMeetings
+  }, { merge: true });
 }
 
 export const createUser = async (name) => {
-  await addDoc(collection(db, "hours"), {name: name, hours: 0, meetings: [], volunteer: 0});
+  await addDoc(collection(db, "hours"), {name: name, hours: 0, meetings: [], volunteer: 0}).then(doc => {
+    setDoc(doc, { uid: doc.id }, { merge: true })
+  });
 }

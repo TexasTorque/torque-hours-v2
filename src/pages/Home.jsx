@@ -7,7 +7,6 @@ import {
     getRank,
     signIn,
     signOut,
-    getUID,
     getUserFromUID,
 } from "../firebase.jsx"
 import { useEffect, useState } from "react";
@@ -42,7 +41,7 @@ export default function Home() {
         setShowGreeting(true);
         setSignMessage(user.signin > 0 ? "Sign Out" : "Sign In");
 
-        getUID(user.name).then(uid => localStorage.setItem("user", uid));
+        localStorage.setItem("user", user.uid);
     }
 
     const signInOut = () => {
