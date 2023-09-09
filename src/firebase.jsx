@@ -82,18 +82,19 @@ export const checkPassword = async (password) => {
   return password === passwordSnap.docs[0]._document.data.value.mapValue.fields.password.stringValue;
 }
 
-export const setStats = async (user, newName, newHours, volunteerHours, newMeetings) => {
+export const setStats = async (user, newName, newHours, volunteerHours, newMeetings, newGraduation) => {
   const hoursRef = doc(db, 'hours', user.uid);
   setDoc(hoursRef, { 
     name: newName,
     hours: newHours,
     volunteer: volunteerHours,
-    meetings: newMeetings
+    meetings: newMeetings,
+    graduation: newGraduation,
   }, { merge: true });
 }
 
 export const createUser = async (name) => {
-  await addDoc(collection(db, "hours"), {name: name, hours: 0, meetings: [], volunteer: 0}).then(doc => {
+  await addDoc(collection(db, "hours"), {name: name, hours: 0, meetings: [], volunteer: 0, graduation: new Date().getFullYear() + 4}).then(doc => {
     setDoc(doc, { uid: doc.id }, { merge: true })
   });
 }

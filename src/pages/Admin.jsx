@@ -110,6 +110,7 @@ export default function Admin() {
                         <p className="stat">Recorded Hours: 0</p>   
                         <p className="stat">Volunteer Hours: 0</p>   
                         <p className="stat">Meetings Attended: 0</p>   
+                        <p className="stat">Graduation Year: {new Date().getFullYear() + 4}</p>
                     </div>
                     
                     <Button className="edit-button" onClick={() => { createUser(user.name); addUser({name: user.name, hours: 0, meetings: [], volunteer: 0}) }}>Create User</Button>

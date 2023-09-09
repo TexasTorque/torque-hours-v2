@@ -1,14 +1,14 @@
 import { Modal, Button } from "react-bootstrap";
 import { 
     setStats,
- } from "../firebase";
+} from "../firebase";
 
 export default function EditUser({ user, setEditUser, saveUser }) {
 
-    const save = (newName, newHours, newVolunteerHours, newMeetings) => {
-        setStats(user, Number(newName), Number(newHours), Number(newVolunteerHours), newMeetings.split(", "))
+    const save = (newName, newHours, newVolunteerHours, newMeetings, newGraduation) => {
+        setStats(user, newName, Number(newHours), Number(newVolunteerHours), newMeetings.split(", "), Number(newGraduation));
 
-        saveUser({name: newName, hours: Number(newHours), volunteer: Number(newVolunteerHours), meetings: newMeetings.split(", "), uid: user.uid});
+        saveUser({name: newName, hours: Number(newHours), volunteer: Number(newVolunteerHours), meetings: newMeetings.split(", "), uid: user.uid, graduation: user.graduation});
         setEditUser({});
     }
 
@@ -89,7 +89,7 @@ export default function EditUser({ user, setEditUser, saveUser }) {
                         />
                     </div>
                     <div>
-                        <Button variant="success" style={{marginTop: "1em", float: "right"}} onClick={(e) => save(e.target.parentNode.parentNode.children[0].children[1].value, e.target.parentNode.parentNode.children[1].children[1].value, e.target.parentNode.parentNode.children[2].children[1].value, e.target.parentNode.parentNode.children[3].children[1].value)}>
+                        <Button variant="success" style={{marginTop: "1em", float: "right"}} onClick={(e) => save(e.target.parentNode.parentNode.children[0].children[1].value, e.target.parentNode.parentNode.children[1].children[1].value, e.target.parentNode.parentNode.children[2].children[1].value, e.target.parentNode.parentNode.children[3].children[1].value, e.target.parentNode.parentNode.children[4].children[1].value)}>
                             Save
                         </Button>
                     </div>
