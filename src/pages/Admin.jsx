@@ -107,13 +107,13 @@ export default function Admin() {
                     <h3 style={{ color: "white", marginTop: ".25em", textDecoration: "underline"}}>{user.name}</h3>
 
                     <div className="statistics">
-                        <p className="stat">Recorded Hours: 0</p>   
-                        <p className="stat">Volunteer Hours: 0</p>   
-                        <p className="stat">Meetings Attended: 0</p>   
+                        <p className="stat">Recorded Hours: 0</p>
+                        <p className="stat">Volunteer Hours: 0</p>  
+                        <p className="stat">Meetings Attended: 0</p>
                         <p className="stat">Graduation Year: {new Date().getFullYear() + 4}</p>
                     </div>
                     
-                    <Button className="edit-button" onClick={() => { createUser(user.name); addUser({name: user.name, hours: 0, meetings: [], volunteer: 0}) }}>Create User</Button>
+                    <Button className="edit-button" onClick={() => { createUser(user.name); addUser({name: user.name, hours: 0, meetings: [], volunteer: 0, graduation: new Date().getFullYear() + 4}) }}>Create User</Button>
                 </div>
             }
 
