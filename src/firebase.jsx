@@ -94,7 +94,8 @@ export const setStats = async (user, newName, newHours, volunteerHours, newMeeti
 }
 
 export const createUser = async (name) => {
-  await addDoc(collection(db, "hours"), {name: name, hours: 0, meetings: [], volunteer: 0, graduation: new Date().getFullYear() + 4}).then(doc => {
-    setDoc(doc, { uid: doc.id }, { merge: true })
+  return await addDoc(collection(db, "hours"), {name: name, hours: 0, meetings: [], volunteer: 0, graduation: new Date().getFullYear() + 4}).then(doc => {
+    setDoc(doc, { uid: doc.id }, { merge: true });
+    return doc.id;
   });
 }

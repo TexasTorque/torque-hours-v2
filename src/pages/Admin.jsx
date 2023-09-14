@@ -113,7 +113,7 @@ export default function Admin() {
                         <p className="stat">Graduation Year: {new Date().getFullYear() + 4}</p>
                     </div>
                     
-                    <Button className="edit-button" onClick={() => { createUser(user.name); addUser({name: user.name, hours: 0, meetings: [], volunteer: 0, graduation: new Date().getFullYear() + 4}) }}>Create User</Button>
+                    <Button className="edit-button" onClick={() => { createUser(user.name).then((uid) => addUser({uid: uid, name: user.name, hours: 0, meetings: [], volunteer: 0, graduation: new Date().getFullYear() + 4}))}}>Create User</Button>
                 </div>
             }
 

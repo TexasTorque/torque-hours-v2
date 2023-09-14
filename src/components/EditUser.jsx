@@ -6,9 +6,15 @@ import {
 export default function EditUser({ user, setEditUser, saveUser }) {
 
     const save = (newName, newHours, newVolunteerHours, newMeetings, newGraduation) => {
-        setStats(user, newName, Number(newHours), Number(newVolunteerHours), newMeetings.split(", "), Number(newGraduation));
+        let meetings;
+        if (newMeetings === "") {
+            meetings = [];
+        } else {
+            meetings = newMeetings.split(", ");
+        }
+        setStats(user, newName, Number(newHours), Number(newVolunteerHours), meetings, Number(newGraduation));
 
-        saveUser({name: newName, hours: Number(newHours), volunteer: Number(newVolunteerHours), meetings: newMeetings.split(", "), uid: user.uid, graduation: user.graduation});
+        saveUser({name: newName, hours: Number(newHours), volunteer: Number(newVolunteerHours), meetings: meetings, uid: user.uid, graduation: user.graduation});
         setEditUser({});
     }
 
@@ -38,6 +44,7 @@ export default function EditUser({ user, setEditUser, saveUser }) {
                             name="name"
                             style={{marginLeft: "10px", float: "right"}}
                             defaultValue={user.name}
+                            id="username"
                         />
                     </div>
                     <div>
@@ -50,6 +57,7 @@ export default function EditUser({ user, setEditUser, saveUser }) {
                             name="name"
                             style={{marginLeft: "10px", float: "right"}}
                             defaultValue={user.hours}
+                            id="hours"
                         />
                     </div>
                     <div>
@@ -62,6 +70,7 @@ export default function EditUser({ user, setEditUser, saveUser }) {
                             name="name"
                             style={{marginLeft: "10px", float: "right"}}
                             defaultValue={user.volunteer}
+                            id="volunteer"
                         />
                     </div>
                     <div>
@@ -74,6 +83,7 @@ export default function EditUser({ user, setEditUser, saveUser }) {
                             name="name"
                             style={{marginLeft: "10px", float: "right"}}
                             defaultValue={String(user.meetings).replaceAll(",", ", ")}
+                            id="meetings"
                         />
                     </div>
                     <div>
@@ -86,10 +96,18 @@ export default function EditUser({ user, setEditUser, saveUser }) {
                             name="name"
                             style={{marginLeft: "10px", float: "right"}}
                             defaultValue={user.graduation}
+                            id="graduation"
                         />
                     </div>
                     <div>
-                        <Button variant="success" style={{marginTop: "1em", float: "right"}} onClick={(e) => save(e.target.parentNode.parentNode.children[0].children[1].value, e.target.parentNode.parentNode.children[1].children[1].value, e.target.parentNode.parentNode.children[2].children[1].value, e.target.parentNode.parentNode.children[3].children[1].value, e.target.parentNode.parentNode.children[4].children[1].value)}>
+                        <Button variant="success" style={{marginTop: "1em", float: "right"}} onClick={(e) => save(
+                                    document.getElementById("username").value,
+                                    document.getElementById("hours").value,
+                                    document.getElementById("volunteer").value,
+                                    document.getElementById("meetings").value,
+                                    document.getElementById("graduation").value
+                                )
+                            }>
                             Save
                         </Button>
                     </div>
