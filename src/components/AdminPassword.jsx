@@ -33,13 +33,13 @@ export default function AdminPassword() {
                     <input
                         type="password"
                         name="name"
-                        style={{marginLeft: "10px"}}
+                        style={{marginLeft: "10px", width: "8em"}}
                         onChange={(e) => {
                             setPass(e.target.value);
                         }}
                     />
                     <Button
-                        style={{marginLeft: "10px"}}
+                        style={{marginLeft: "10px", textAlign: "right"}}
                         onClick={() => {
                             checkPassword(pass).then(val => setShow(!val));
                         }}

@@ -68,7 +68,7 @@ body {
 
 .select-user-group {
   margin-top: 3em;
-  width: 25rem;
+  width: 21rem;
   margin-right: auto;
   margin-left: auto;
 }
@@ -108,6 +108,7 @@ body {
 
 .edit-button {
   margin-top: 1em;
+  margin-bottom: 56px;
 }
 
 .stat {

@@ -83,7 +83,7 @@ export default function Home() {
             <Header />
             <div className="main">
                 <div className="select-name">
-                    <h1 className="name-prompt">Select Your Name:</h1>
+                    <h1 className="name-prompt">Select Name:</h1>
                     <Dropdown className="dropdown-button">
                         <Dropdown.Toggle variant="primary">
                             { dropdown }
