@@ -58,6 +58,7 @@ export default function Attendance() {
                 </thead>
                 <tbody>
                     {users
+                        .filter(user => Math.floor(new Date().getTime() / 1000) - user.signin < 4 * 3600) // 4 hours
                         .map((user, index) => (
                             <tr key={index}>
                                 <th className="hours-cell" style={{ color: "white", backgroundColor: "black"}}>{user.name}</th>
