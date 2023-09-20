@@ -38,7 +38,7 @@ export default function Leaderboard() {
                 bordered
                 hover
                 className="hours-table"
-                style={{ marginLeft: "auto", marginRight: "auto", width: "70%", marginBottom: "30px"}}
+                style={{ marginLeft: "auto", marginRight: "auto", width: "80%", marginBottom: "30px"}}
             >
                 <thead>
                     <tr style={{ textAlign: "center" }}>
