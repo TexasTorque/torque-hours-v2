@@ -20,7 +20,7 @@ export default function Home() {
     const [showGreeting, setShowGreeting] = useState(false);
     const [signMessage, setSignMessage] = useState("Sign In");
 
-    const maxHours = 10;
+    const maxHours = 4;
     const navigate = useNavigate();
 
     useEffect(() => {
