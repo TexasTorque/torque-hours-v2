@@ -78,8 +78,8 @@ export const signOut = async (user) => {
 }
 
 export const checkPassword = async (password) => {
-  const passwordSnap = await getDocs(collection(db, "settings"));
-  return password === passwordSnap.docs[0]._document.data.value.mapValue.fields.password.stringValue;
+  const settingsSnap = await getDocs(collection(db, "settings"));
+  return password === settingsSnap.docs[0]._document.data.value.mapValue.fields.password.stringValue;
 }
 
 export const setStats = async (user, newName, newHours, volunteerHours, newMeetings, newGraduation) => {
@@ -98,4 +98,16 @@ export const createUser = async (name) => {
     setDoc(doc, { uid: doc.id }, { merge: true });
     return doc.id;
   });
+}
+
+export const getMaxHours = async () => {
+  const settingsSnap = await getDocs(collection(db, "settings"));
+  return settingsSnap.docs[1]._document.data.value.mapValue.fields.maxHours.integerValue;
+}
+
+export const setSettings = async (maxHours) => {
+  const hoursRef = doc(db, 'settings', "settings");
+  setDoc(hoursRef, {
+    maxHours: Number(maxHours),
+  }, { merge: true });
 }
