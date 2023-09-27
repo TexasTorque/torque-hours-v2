@@ -8,6 +8,7 @@ import {
     signIn,
     signOut,
     getUserFromUID,
+    getMaxHours,
 } from "../firebase.jsx"
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -19,8 +20,8 @@ export default function Home() {
     const [dropdown, setDropdown] = useState("Pick User");
     const [showGreeting, setShowGreeting] = useState(false);
     const [signMessage, setSignMessage] = useState("Sign In");
+    const [maxHours, setMaxHours] = useState(4);
 
-    const maxHours = 4;
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -33,6 +34,8 @@ export default function Home() {
         if (localStorage.getItem("user")) {
             getUserFromUID(localStorage.getItem("user")).then(useUser);
         }
+
+        getMaxHours().then(setMaxHours);
     }, []);
 
     const useUser = (user) => {
@@ -45,6 +48,7 @@ export default function Home() {
     }
 
     const signInOut = () => {
+        console.log(maxHours);
         if (user.signin) {
             let calcHours = Math.floor(((new Date().getTime() / 1000) - user.signin) / 3600);
             if (calcHours > 0) {
@@ -107,6 +111,7 @@ export default function Home() {
                                         );
                                     }
                                 )
+                                
                             }
                         </Dropdown.Menu>
                     </Dropdown>
