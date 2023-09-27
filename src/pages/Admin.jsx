@@ -10,12 +10,14 @@ import {
     createUser,
 } from "../firebase";
 import EditUser from "../components/EditUser";
+import Settings from "../components/Settings";
 
 export default function Admin() {
     const [users, setUsers] = useState([]);
     const [user, setUser] = useState({});
     const [editUser, setEditUser] = useState({});
     const [searchQuery, setSearchQuery] = useState("");
+    const [settingsVisible, setSettingsVisible] = useState(false);
 
     useEffect(() => {
         const resolveUsers = async () => {
@@ -135,11 +137,11 @@ export default function Admin() {
             }
 
             <EditUser user={editUser} setEditUser={setEditUser} saveUser={saveUser}/>
+            <Settings visible={settingsVisible} setSettingsVisible={setSettingsVisible}/>
 
             <div className="footer-buttons">
-                <Button className="footer-button" onClick={() => navigate("/leaderboard")}>Leaderboard</Button>
                 <Button className="footer-button" onClick={() => navigate("/")}>Home</Button>
-                <Button className="footer-button" onClick={() => navigate("/attendance")}>Attendance</Button>
+                <Button className="footer-button" onClick={() => setSettingsVisible(true)}>Settings</Button>
             </div>
         </>
     )
