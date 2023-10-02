@@ -43,6 +43,11 @@ export default function Attendance() {
     return (
         <>
             <Header />
+            <div className="footer-buttons-top">
+                <Button className="footer-button-top" onClick={() => navigate("/leaderboard")}>Leaderboard</Button>
+                <Button className="footer-button-top" onClick={() => navigate("/")}>Home</Button>
+                <Button className="footer-button-top" onClick={() => navigate("/admin")}>Admin</Button>
+            </div>
             <Table
                 striped
                 bordered
@@ -68,11 +73,6 @@ export default function Attendance() {
                     }
                 </tbody>
             </Table>
-            <div className="footer-buttons">
-                <Button className="footer-button" onClick={() => navigate("/leaderboard")}>Leaderboard</Button>
-                <Button className="footer-button" onClick={() => navigate("/")}>Home</Button>
-                <Button className="footer-button" onClick={() => navigate("/admin")}>Admin</Button>
-            </div>
         </>
     )
 }

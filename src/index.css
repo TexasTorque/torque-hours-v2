@@ -137,13 +137,13 @@ body {
   justify-content: center;
 }
 
-.footer-buttons-free {
+.footer-buttons-top {
   display: flex;
   justify-content: center;
 }
 
-.footer-button-free {
-  margin-bottom: 1.75em;
+.footer-button-top {
+  margin-top: 2em;
   margin-left: .25em;
   margin-right: .25em;
 }

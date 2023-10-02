@@ -33,6 +33,11 @@ export default function Leaderboard() {
     return (
         <>
             <Header />
+            <div className="footer-buttons-top">
+                <Button className="footer-button-top" onClick={() => navigate("/attendance")}>Attendance</Button>
+                <Button className="footer-button-top" onClick={() => navigate("/")}>Home</Button>
+                <Button className="footer-button-top" onClick={() => navigate("/admin")}>Admin</Button>
+            </div>
             <Table
                 striped
                 bordered
@@ -59,11 +64,6 @@ export default function Leaderboard() {
                     }
                 </tbody>
             </Table>
-            <div className="footer-buttons-free">
-                <Button className="footer-button-free" onClick={() => navigate("/attendance")}>Attendance</Button>
-                <Button className="footer-button-free" onClick={() => navigate("/")}>Home</Button>
-                <Button className="footer-button-free" onClick={() => navigate("/admin")}>Admin</Button>
-            </div>
         </>
     );
 }
