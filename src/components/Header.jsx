@@ -5,7 +5,10 @@ export default function Header() {
     <div className="header">
       <div className="header-border-box">
         <img src={torque_logo} style={{ height: "3.5em", width: "3.5em" }}></img>
-        <h4 className="header-name">Torque Hours</h4>
+        <div>
+          <h4 className="header-name">Torque Hours</h4>
+          <p className="header-credit">Created by Davey</p>
+        </div>
       </div>
     </div>
   );

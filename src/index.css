@@ -28,6 +28,7 @@ body {
 .header-border-box {
   display: flex;
   padding: 15px;
+  padding-bottom: 0px;
   border: 5px solid white;
 }
 
@@ -35,7 +36,16 @@ body {
   font-family: "Market_Deco";
   color: white;
   font-size: 2em;
-  margin-top: 0.2em;
+  margin-top: -.15em;
+  margin-bottom: 0px;
+  margin-right: .3em;
+}
+
+.header-credit {
+  font-family: "Market_Deco";
+  margin: 0px;
+  margin-bottom: .7em;
+  color: white;
 }
 
 .select-name {
