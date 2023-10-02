@@ -11,6 +11,7 @@ import {
 } from "../firebase";
 import EditUser from "../components/EditUser";
 import Settings from "../components/Settings";
+import Autocomplete from "../components/Autocomplete";
 
 export default function Admin() {
     const [users, setUsers] = useState([]);
@@ -69,38 +70,8 @@ export default function Admin() {
             <Header />
             <AdminPassword />
 
-            <div className="select-user-group">
-                <InputGroup>
-                    <Form.Control
-                        id="main-search"
-                        placeholder="Select or Enter Name"
-                        onChange={(e) => setSearch(e.target.value)}
-                    />
-                    <Dropdown className="dropdown-button">
-                        <Dropdown.Toggle variant="primary">Select User</Dropdown.Toggle>
-                        <Dropdown.Menu className="dropdown-menu">
-                            <input
-                                className="dropdown-search"
-                                autoFocus
-                                autoComplete="none"
-                                onChange={(e) => setSearchQuery(e.target.value)}
-                            ></input>
-                            { 
-                                users
-                                    .filter((user) => user.name.toLowerCase().includes(searchQuery.toLowerCase()))
-                                    .sort((a, b) => a.name.localeCompare(b.name))
-                                    .map((user, index) => {
-                                        return (
-                                            <Dropdown.Item key={index} onClick={(e) => { e.target.parentNode.parentNode.children[0].value=user.name; setEditUser({}); setUser(user)}}>
-                                                {user.name}
-                                            </Dropdown.Item>
-                                        );
-                                    }
-                                )
-                            }
-                        </Dropdown.Menu>
-                    </Dropdown>
-                </InputGroup>
+            <div className="select-user">
+                <Autocomplete width={"21rem"} users={users} height={"300px"} onClick={setSearch}/>
             </div>
 
             {user.create && 

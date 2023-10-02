@@ -83,6 +83,15 @@ body {
   margin-left: auto;
 }
 
+.select-user {
+  display: flex;
+  justify-content: center;
+  width: 21rem;
+  margin-top: 3em;
+  margin-right: auto;
+  margin-left: auto;
+}
+
 .hours-cell {
   text-align: center;
   font-weight: 400;
