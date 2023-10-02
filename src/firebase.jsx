@@ -60,7 +60,7 @@ export const getRank = (users, user) => {
 
 export const addHours = async (user, hours) => {
   const hoursRef = doc(db, 'hours', user.uid);
-  setDoc(hoursRef, { hours: user.hours + hours }, { merge: true });
+  setDoc(hoursRef, { hours: Number(user.hours) + Number(hours) }, { merge: true });
 }
 
 export const signIn = async (user) => {

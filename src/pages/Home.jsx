@@ -35,7 +35,9 @@ export default function Home() {
             getUserFromUID(localStorage.getItem("user")).then(useUser);
         }
 
-        getMaxHours().then(setMaxHours);
+        getMaxHours().then((val) => {
+            setMaxHours(val);
+        });
     }, []);
 
     const useUser = (user) => {
@@ -48,20 +50,21 @@ export default function Home() {
     }
 
     const signInOut = () => {
-        console.log(maxHours);
         if (user.signin) {
             let calcHours = Math.floor(((new Date().getTime() / 1000) - user.signin) / 3600);
             if (calcHours > 0) {
-                if (calcHours > maxHours) calcHours = maxHours;
+                if (calcHours > maxHours) {
+                    calcHours = maxHours;
+                }
                 
                 addHours(user, calcHours);
             }
             signOut(user);
-            setUser({ name: user.name, volunteer: user.volunteer, hours: user.hours + calcHours, meetings: user.meetings});
+            setUser({ name: user.name, volunteer: user.volunteer, hours: Number(user.hours) + Number(calcHours), meetings: user.meetings, uid: user.uid});
             setSignMessage("Sign In");
         } else {
             signIn(user);
-            setUser({ name: user.name, volunteer: user.volunteer, hours: user.hours, meetings: user.meetings, signin: Math.floor(new Date().getTime() / 1000)});
+            setUser({ name: user.name, volunteer: user.volunteer, hours: user.hours, meetings: user.meetings, uid: user.uid, signin: Math.floor(new Date().getTime() / 1000)});
             setSignMessage("Sign Out");
         }
     }
