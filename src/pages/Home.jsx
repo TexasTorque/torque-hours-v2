@@ -129,7 +129,7 @@ export default function Home() {
                     <div className="statistics">
                         <p className="stat">Your Hours This Season: {user.hours}</p>
                         <p className="stat">Your Meetings Attended: {user.meetings.length}</p>
-                        <p className="stat">Your Volunteer Hours: {user.volunteer}</p>
+                        <p className="stat">Your Volunteer Sessions: {user.volunteer}</p>
                         <p className="stat">Your Hours Rank (Out of {users.length}): #{ getRank(users, user) }</p>
                         <br></br>
                         {user.signin &&
