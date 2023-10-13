@@ -64,7 +64,7 @@ export default function EditUser({ user, setEditUser, saveUser }) {
                         <label
                             style={{fontSize: 22, fontWeight: 500}}
                         >
-                        Volunteer Hours:
+                        Volunteer Sessions:
                         </label>
                         <input
                             name="name"
