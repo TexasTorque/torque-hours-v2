@@ -48,6 +48,10 @@ body {
   color: white;
 }
 
+.header-credit:hover {
+  cursor: pointer !important;
+}
+
 .select-name {
   margin: 1.5em;
   color: white;
