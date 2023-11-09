@@ -17,7 +17,7 @@ export default function Leaderboard() {
 
                 setUsers(users);
             });
-        }
+        };
 
         resolveUsers();
     }, []);
@@ -28,7 +28,7 @@ export default function Leaderboard() {
         else if (rank === 2) return " 🥈";
         else if (rank === 3) return " 🥉";
         else return "";
-    }
+    };
 
     return (
         <>
@@ -43,22 +43,24 @@ export default function Leaderboard() {
                 bordered
                 hover
                 className="hours-table"
-                style={{ marginLeft: "auto", marginRight: "auto", width: "80%", marginBottom: "30px"}}
+                style={{ marginLeft: "auto", marginRight: "auto", width: "80%", marginBottom: "30px" }}
             >
                 <thead>
                     <tr style={{ textAlign: "center" }}>
-                        <th style={{ color: "white", backgroundColor: "black", width: "10%"}}>Rank</th>
-                        <th style={{ color: "white", backgroundColor: "black", width: "70%"}}>Name</th>
-                        <th style={{ color: "white", backgroundColor: "black", width: "10%"}}>Hours</th>
+                        <th style={{ color: "white", backgroundColor: "black", width: "10%" }}>Rank</th>
+                        <th style={{ color: "white", backgroundColor: "black", width: "70%" }}>Name</th>
+                        <th style={{ color: "white", backgroundColor: "black", width: "10%" }}>Hours</th>
+                        <th style={{ color: "white", backgroundColor: "black", width: "10%" }}>Volunteer</th>
                     </tr>
                 </thead>
                 <tbody>
                     {users
                         .map((user, index) => (
                             <tr key={index}>
-                                <th className="hours-cell" style={{ color: "white", backgroundColor: "black"}}>{index + 1}</th>
-                                <th className="hours-cell" style={{ color: "white", backgroundColor: "black"}}>{user.name + getRank(index + 1)}</th>
-                                <th className="hours-cell" style={{ color: "white", backgroundColor: "black"}}>{user.hours}</th>
+                                <th className="hours-cell" style={{ color: "white", backgroundColor: "black" }}>{index + 1}</th>
+                                <th className="hours-cell" style={{ color: "white", backgroundColor: "black" }}>{user.name + getRank(index + 1)}</th>
+                                <th className="hours-cell" style={{ color: "white", backgroundColor: "black" }}>{user.hours}</th>
+                                <th className="hours-cell" style={{ color: "white", backgroundColor: "black" }}>{user.volunteer}</th>
                             </tr>
                         ))
                     }
