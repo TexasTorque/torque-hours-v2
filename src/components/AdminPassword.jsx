@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { checkPassword } from "../firebase"
 
-export default function AdminPassword() {
+export default function AdminPassword({setSignedIn}) {
     const [pass, setPass] = useState("");
     const [show, setShow] = useState(true);
 
@@ -41,7 +41,10 @@ export default function AdminPassword() {
                     <Button
                         style={{marginLeft: "10px", textAlign: "right"}}
                         onClick={() => {
-                            checkPassword(pass).then(val => setShow(!val));
+                            checkPassword(pass).then(res => {
+                                setShow(!res);
+                                setSignedIn(true);
+                            });
                         }}
                     >
                     ✓
