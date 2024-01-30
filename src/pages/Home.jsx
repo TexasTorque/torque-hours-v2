@@ -128,6 +128,7 @@ export default function Home() {
 
                     <div className="statistics">
                         <p className="stat">Your Hours This Season: {user.hours}</p>
+                        <p className="stat">Your Season Hours: { Math.round(calculateSeasonHours(user)) }</p>
                         <p className="stat">Your Meetings Attended: {user.meetings.length}</p>
                         <p className="stat">Your Volunteer Sessions: {user.volunteer}</p>
                         <p className="stat">Your Hours Rank (Out of {users.length}): #{ getRank(users, user) }</p>
@@ -151,4 +152,18 @@ export default function Home() {
             </div>
         </>
     )
+}
+
+export const calculateSeasonHours = (user) => {
+    const seasonStart = new Date("1/6/2024");
+    var after = 0;
+
+    user.meetings.forEach((meeting) => {
+        if (new Date(meeting) >= seasonStart) {
+            after++;
+        }
+    });
+
+    var ans = user.hours * after / user.meetings.length;
+    return !ans ? 0 : ans;
 }
