@@ -43,6 +43,20 @@ export const getAllUsers = async () => {
   return hoursSnap.docs.map((doc) => doc.data());
 }
 
+export const calculateSeasonHours = (user) => {
+  const seasonStart = new Date("1/6/2024");
+  var after = 0;
+
+  user.meetings.forEach((meeting) => {
+      if (new Date(meeting) >= seasonStart) {
+          after++;
+      }
+  });
+
+  var ans = user.hours * after / user.meetings.length;
+  return !ans ? 0 : ans;
+}
+
 export const getRank = (users, user) => {
   let rank = 1;
   users.forEach(u => {

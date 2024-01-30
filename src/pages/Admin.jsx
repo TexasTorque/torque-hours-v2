@@ -8,11 +8,11 @@ import default_user from "../assets/default_user.png"
 import {
     getAllUsers,
     createUser,
+    calculateSeasonHours,
 } from "../firebase";
 import EditUser from "../components/EditUser";
 import Settings from "../components/Settings";
 import Autocomplete from "../components/Autocomplete";
-import { calculateSeasonHours } from "./Home.jsx";
 
 export default function Admin() {
     const [users, setUsers] = useState([]);

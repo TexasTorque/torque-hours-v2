@@ -9,6 +9,7 @@ import {
     signOut,
     getUserFromUID,
     getMaxHours,
+    calculateSeasonHours,
 } from "../firebase.jsx"
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -152,18 +153,4 @@ export default function Home() {
             </div>
         </>
     )
-}
-
-export const calculateSeasonHours = (user) => {
-    const seasonStart = new Date("1/6/2024");
-    var after = 0;
-
-    user.meetings.forEach((meeting) => {
-        if (new Date(meeting) >= seasonStart) {
-            after++;
-        }
-    });
-
-    var ans = user.hours * after / user.meetings.length;
-    return !ans ? 0 : ans;
 }

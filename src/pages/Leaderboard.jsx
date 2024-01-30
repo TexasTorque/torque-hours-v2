@@ -3,8 +3,10 @@ import Header from "../components/Header";
 import { useNavigate } from "react-router-dom";
 import { Button, Table } from "react-bootstrap";
 import { useEffect, useState } from "react";
-import { getAllUsers } from "../firebase";
-import { calculateSeasonHours } from "./Home";
+import { 
+    getAllUsers,
+    calculateSeasonHours ,
+} from "../firebase";
 
 export default function Leaderboard() {
     const [users, setUsers] = useState([]);
