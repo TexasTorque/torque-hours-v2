@@ -8,6 +8,7 @@ import default_user from "../assets/default_user.png"
 import {
     getAllUsers,
     createUser,
+    calculateSeasonHours,
 } from "../firebase";
 import EditUser from "../components/EditUser";
 import Settings from "../components/Settings";
@@ -83,6 +84,7 @@ export default function Admin() {
 
                             <div className="statistics">
                                 <p className="stat">Recorded Hours: 0</p>
+                                <p className="stat">Recorded Season Hours: 0</p>
                                 <p className="stat">Volunteer Sessions: 0</p>  
                                 <p className="stat">Meetings Attended: 0</p>
                                 <p className="stat">Graduation Year: {new Date().getFullYear() + 4}</p>
@@ -100,6 +102,7 @@ export default function Admin() {
 
                             <div className="statistics" style={{marginTop: "-10px"}}>
                                 <p className="stat">Recorded Hours: {user.hours}</p>   
+                                <p className="stat">Recorded Season Hours: {Math.round(calculateSeasonHours(user))}</p>   
                                 <p className="stat">Volunteer Sessions: {user.volunteer}</p>   
                                 <p className="stat">Meetings Attended: {user.meetings.length}</p>   
                                 <p className="stat">Graduation Year: {user.graduation}</p>   

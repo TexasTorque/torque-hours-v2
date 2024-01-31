@@ -9,6 +9,7 @@ import {
     signOut,
     getUserFromUID,
     getMaxHours,
+    calculateSeasonHours,
 } from "../firebase.jsx"
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -128,6 +129,7 @@ export default function Home() {
 
                     <div className="statistics">
                         <p className="stat">Your Hours This Season: {user.hours}</p>
+                        <p className="stat">Your Season Hours: { Math.round(calculateSeasonHours(user)) }</p>
                         <p className="stat">Your Meetings Attended: {user.meetings.length}</p>
                         <p className="stat">Your Volunteer Sessions: {user.volunteer}</p>
                         <p className="stat">Your Hours Rank (Out of {users.length}): #{ getRank(users, user) }</p>
