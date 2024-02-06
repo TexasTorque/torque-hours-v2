@@ -128,14 +128,16 @@ export default function Home() {
                     </div>
 
                     <div className="statistics">
-                        <p className="stat">Your Hours This Season: {user.hours}</p>
-                        <p className="stat">Your Season Hours: { Math.round(calculateSeasonHours(user)) }</p>
-                        <p className="stat">Your Meetings Attended: {user.meetings.length}</p>
-                        <p className="stat">Your Volunteer Sessions: {user.volunteer}</p>
-                        <p className="stat">Your Hours Rank (Out of {users.length}): #{ getRank(users, user) }</p>
-                        <br></br>
+                        <p className="stat">Off-Season Hours: {user.hours - Math.round(calculateSeasonHours(user))}</p>
+                        <p className="stat">Current Season Hours: { Math.round(calculateSeasonHours(user)) }</p>
+                        <p className="stat">Meetings Attended: {user.meetings.length}</p>
+                        <p className="stat">Volunteer Events Attended: {user.volunteer}</p>
+                        <p className="stat">Hours Rank (Out of {users.length}): #{ getRank(users, user) }</p>
                         {user.signin &&
-                            <p className="stat">Signed In Time: {secondsToTime(Math.floor(new Date().getTime() / 1000) - user.signin)}</p>
+                            <>
+                                <br></br>
+                                <p className="stat">Signed In Time: {secondsToTime(Math.floor(new Date().getTime() / 1000) - user.signin)}</p>
+                            </>
                         }
                     </div>
 

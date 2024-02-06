@@ -101,11 +101,11 @@ export default function Admin() {
                             <p style={{ color: "white"}}>{user.uid}</p>
 
                             <div className="statistics" style={{marginTop: "-10px"}}>
-                                <p className="stat">Recorded Hours: {user.hours}</p>   
-                                <p className="stat">Recorded Season Hours: {Math.round(calculateSeasonHours(user))}</p>   
-                                <p className="stat">Volunteer Sessions: {user.volunteer}</p>   
-                                <p className="stat">Meetings Attended: {user.meetings.length}</p>   
-                                <p className="stat">Graduation Year: {user.graduation}</p>   
+                                <p className="stat">Off-Season Hours: {user.hours - Math.round(calculateSeasonHours(user))}</p>
+                                <p className="stat">Current Season Hours: { Math.round(calculateSeasonHours(user)) }</p>
+                                <p className="stat">Meetings Attended: {user.meetings.length}</p>
+                                <p className="stat">Volunteer Events Attended: {user.volunteer}</p>
+                                <p className="stat">Graduation Year: { user.graduation }</p>
                             </div>
                             
                             <Button className="edit-button" onClick={() => setEditUser(user) }>Edit User</Button>
